@@ -1,3 +1,5 @@
+# Space_Trace
+
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
@@ -19,3 +21,5 @@ We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public S
 If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
 
 You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
+
+[![](https://opencollective.com/Space_Trace/contributors.svg?width=890&button=false)](https://github.com/KarelHudera/Space_Trace/graphs/contributors)
