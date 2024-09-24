@@ -21,5 +21,15 @@ We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public S
 If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
 
 You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
+You can open the desktop application by running the `:composeApp:run` Gradle task.
 
-[![](https://opencollective.com/Space_Trace/contributors.svg?width=890&button=false)](https://github.com/KarelHudera/Space_Trace/graphs/contributors)
+
+## Contributors
+
+Thanks to these wonderful people for contributing to the project:
+
+- [Karel Hudera](https://github.com/KarelHudera)
+- [Tomáš Borek](https://github.com/Resiniferatoxin123)
+- [Vojta Šlosar](https://github.com/Vojtza)
+- [Nikola Spěšný](https://github.com/artas1340)
+- [Štěpán Mikule](https://github.com/stepanmik)
