@@ -28,7 +28,7 @@ You can open the desktop application by running the `:composeApp:run` Gradle tas
 
 Thanks to these wonderful people for contributing to the project:
 
-- [Karel Hudera](https://github.com/KarelHudera)
+- [Karel Hudera](https://github.com/KarelHudera) ahoj
 - [Tomáš Borek](https://github.com/Resiniferatoxin123)
 - [Vojta Šlosar](https://github.com/Vojtza)
 - [Nikola Spěšný](https://github.com/artas1340)
