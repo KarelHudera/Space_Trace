@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace
+package karel.hudera.spacetrace.platform
 
 interface Platform {
     val name: String
