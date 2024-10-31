@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace
+package karel.hudera.spacetrace.platform
 
 import android.os.Build
 
