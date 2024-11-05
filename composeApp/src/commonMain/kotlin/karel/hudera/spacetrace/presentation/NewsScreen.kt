@@ -1,22 +1,19 @@
 package karel.hudera.spacetrace.presentation
 
+import RLSViewModel
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
-import karel.hudera.spacetrace.platform.getHttpClientEngineFactory
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import karel.hudera.spacetrace.presentation.model.ResourceUiState
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
+import org.koin.core.annotation.KoinExperimentalAPI
 import spacetrace.composeapp.generated.resources.Res
 import spacetrace.composeapp.generated.resources.globe
 
@@ -38,41 +35,34 @@ object NewsScreen : Tab {
             }
         }
 
+    @OptIn(ExperimentalVoyagerApi::class, KoinExperimentalAPI::class)
     @Composable
     override fun Content() {
-        val scope = rememberCoroutineScope()
-        var text by remember { mutableStateOf("Loading") }
+        val viewModel = koinInject<RLSViewModel>()
 
-        LaunchedEffect(true) {
-            scope.launch {
-                text = try {
-                    Greeting().greeting()
-                } catch (e: Exception) {
-                    e.message ?: "error"
+        val newsState by viewModel.newsState.collectAsState()  // ResourceUiState<String>
+
+        Column {
+            when (newsState) {
+                is ResourceUiState.Loading -> Text(text = "Loadinghh...")
+                is ResourceUiState.Success -> {
+                    val newsUrl = (newsState as ResourceUiState.Success).data
+                    GreetingView(newsUrl)  // Display the fetched data
                 }
+
+                is ResourceUiState.Error -> {
+                    val errorMessage = (newsState as ResourceUiState.Error).message
+                    Text(text = "Error: $errorMessage")  // Display the error message
+                }
+
+                is ResourceUiState.Idle -> Text(text = "Idle state")
+                is ResourceUiState.Empty -> Text(text = "No content available")
             }
-
-            delay(1000)
-
         }
-        GreetingView(text)
     }
 }
 
 @Composable
 fun GreetingView(text: String) {
     Text(text = text)
-}
-
-class Greeting {
-    private val nativeEngine = getHttpClientEngineFactory().getEngine()
-    private val client = HttpClient(nativeEngine)
-    suspend fun greeting(): String {
-        return try {
-            val response = client.get("https://api.spacexdata.com/v5/launches")
-            response.bodyAsText()
-        } catch (e: Exception) {
-            "Error: ${e.message}"
-        }
-    }
 }
