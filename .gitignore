@@ -17,3 +17,6 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 /kotlin-js-store/yarn.lock
+
+# Contains API keys. Do not expose this file.
+/composeApp/src/commonMain/kotlin/karel/hudera/spacetrace/data_remote/API_KEYS.kt
