@@ -90,6 +90,7 @@ kotlin {
 
             // Coil for image loading in Compose
             implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor3)
 
             // Ktor core libraries
             implementation(libs.ktor.client.core)

@@ -6,6 +6,7 @@ android-targetSdk = "34"
 androidx-activityCompose = "1.9.3"
 androidx-lifecycle = "2.8.3"
 coilCompose = "3.0.0-rc02"
+coilNetworkKtor3 = "3.0.2"
 compose-plugin = "1.7.0"
 junit = "4.13.2"
 kotlin = "2.0.20"
@@ -13,8 +14,8 @@ kotlinx-coroutines = "1.9.0"
 napier = "2.7.1"
 voyager = "1.1.0-beta02"
 kotlinx-serialization = "1.7.3"
-kotlinx-datetime = "0.6.0"
-ktor = "3.0.0"
+kotlinx-datetime = "0.6.1"
+ktor = "3.0.1"
 koin = "4.0.0"
 
 [libraries]
@@ -29,6 +30,7 @@ androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle
 
 # Compose libraries
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coilNetworkKtor3" }
 
 # Coroutine libraries
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
