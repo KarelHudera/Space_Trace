@@ -7,11 +7,11 @@ import karel.hudera.spacetrace.domain.model.map.Mapper
 class ApiPictureMapper : Mapper<ApiPicture, Picture>() {
     override fun map(model: ApiPicture): Picture = model.run {
         Picture(
-            copyright,
+            copyright ?: "No data",
             date,
             explanation,
             hdurl,
-            mediaType,
+            mediaType ?: "No data",
             serviceVersion,
             title,
             url
