@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.presentation
+package karel.hudera.spacetrace.presentation.ui.navigation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
@@ -26,7 +26,7 @@ import spacetrace.composeapp.generated.resources.settings_full
 
 @Composable
 fun ViewHolder() {
-    TabNavigator(NewsScreen) {
+    TabNavigator(NewsTab) {
         Scaffold(
             content = { innerPadding ->
                 Box(
@@ -38,9 +38,9 @@ fun ViewHolder() {
             },
             bottomBar = {
                 NavigationBar {
-                    TabNavigationItem(NewsScreen)
-                    TabNavigationItem(RocketLaunchScreen)
-                    TabNavigationItem(SettingsScreen)
+                    TabNavigationItem(NewsTab)
+                    TabNavigationItem(RocketLaunchTab)
+                    TabNavigationItem(SettingsTab)
                 }
             }
         )

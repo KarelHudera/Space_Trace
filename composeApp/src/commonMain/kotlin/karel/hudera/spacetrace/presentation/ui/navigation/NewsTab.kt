@@ -1,27 +1,27 @@
-package karel.hudera.spacetrace.presentation
+package karel.hudera.spacetrace.presentation.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import cafe.adriel.voyager.core.screen.ScreenKey
-import cafe.adriel.voyager.core.screen.uniqueScreenKey
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import karel.hudera.spacetrace.presentation.ui.features.news.NewsScreen
 import org.jetbrains.compose.resources.painterResource
 import spacetrace.composeapp.generated.resources.Res
-import spacetrace.composeapp.generated.resources.settings
+import spacetrace.composeapp.generated.resources.globe
 
-object SettingsScreen : Tab {
-    override val key: ScreenKey = uniqueScreenKey
+object NewsTab : Tab {
+
     override val options: TabOptions
         @Composable
         get() {
-            val title = "Settings"
-            val icon = painterResource(Res.drawable.settings)
+            val title = "News"
+            val icon = painterResource(Res.drawable.globe)
 
 
             return remember {
                 TabOptions(
-                    index = 2u,
+                    index = 0u,
                     title = title,
                     icon = icon,
                 )
@@ -30,7 +30,6 @@ object SettingsScreen : Tab {
 
     @Composable
     override fun Content() {
-
+       Navigator(NewsScreen())
     }
-
 }
