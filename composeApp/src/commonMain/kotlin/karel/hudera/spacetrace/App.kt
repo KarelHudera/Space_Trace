@@ -1,31 +1,28 @@
 package karel.hudera.spacetrace
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import coil3.ImageLoader
-import coil3.compose.setSingletonImageLoaderFactory
-import coil3.request.crossfade
-import io.github.aakira.napier.DebugAntilog
-import io.github.aakira.napier.Napier
-import karel.hudera.spacetrace.presentation.ViewHolder
-import karel.hudera.spacetrace.presentation.theme.AppTheme
-import karel.hudera.spacetrace.utils.PlatformInfo
+import karel.hudera.spacetrace.presentation.ui.navigation.ViewHolder
+import karel.hudera.spacetrace.presentation.ui.theme.AppTheme
+import karel.hudera.spacetrace.utils.initImageLoader
+import karel.hudera.spacetrace.utils.initLogger
+import org.koin.compose.KoinContext
 
+/**
+ * The main entry point for the SpaceTrace application.
+ *
+ * This Composable function initializes the necessary application-wide
+ * dependencies such as logging and image loading, and then sets up the
+ * application's main view with theming and navigation.
+ *
+ * @param disableDiskCache Optional flag to disable disk caching for images.
+ */
 @Composable
-internal fun App() {
+internal fun App(disableDiskCache: Boolean = false) = KoinContext {
     // Initialize Napier for logging with DebugAntilog
-    LaunchedEffect(Unit) {
-        Napier.base(DebugAntilog())
-        val platformName = PlatformInfo().getPlatformName()
-        Napier.i("\uD83D\uDFE2 App started on platform: $platformName")
-    }
+    initLogger()
 
-    // Set up image loader with crossfade effect
-    setSingletonImageLoaderFactory { context ->
-        ImageLoader.Builder(context)
-            .crossfade(true)
-            .build()
-    }
+    // Configure and initialize the global Coil ImageLoader instance
+    initImageLoader(disableDiskCache)
 
     // Apply app theme and load main content view
     AppTheme {
