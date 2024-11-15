@@ -101,6 +101,9 @@ kotlin {
             // Koin di
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+
+            // Icons packs
+            implementation(libs.composeIcons.evaIcons)
         }
 
         desktopMain.dependencies {
