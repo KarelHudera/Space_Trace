@@ -1,6 +1,5 @@
 package karel.hudera.spacetrace.presentation.ui.features.news
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -13,7 +12,8 @@ import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import coil3.compose.AsyncImage
+import karel.hudera.spacetrace.presentation.ui.common.ActionAppBar
+import karel.hudera.spacetrace.presentation.ui.common.ImageCard
 import karel.hudera.spacetrace.presentation.ui.state.ResourceUiStateManager
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.compose.koinInject
@@ -37,17 +37,14 @@ class NewsScreen() : Screen {
             }
         }
 
-        Scaffold {
+        Scaffold(
+            topBar = { ActionAppBar() }
+        ) {
             ResourceUiStateManager(
                 modifier = Modifier.fillMaxSize(),
                 resourceUiState = state.picture,
                 successView = {
-                    Box{
-                        AsyncImage(
-                            model = it.url,
-                            contentDescription = it.copyright,
-                        )
-                    }
+                    ImageCard(it)
                 },
                 onCheckAgain = { viewModel.setEvent(NewsScreenContract.Event.OnTryCheckAgainClick) },
                 onTryAgain = { viewModel.setEvent(NewsScreenContract.Event.OnTryCheckAgainClick) }
