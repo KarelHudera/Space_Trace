@@ -7,6 +7,6 @@ import karel.hudera.spacetrace.repository.RepositoryImp
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single<IRemoteData> { RemoteDataImp(get(), get()) }
+    single<IRemoteData> { RemoteDataImp(get(), get(), get()) }
     single<IRepository> { RepositoryImp(get()) }
 }
