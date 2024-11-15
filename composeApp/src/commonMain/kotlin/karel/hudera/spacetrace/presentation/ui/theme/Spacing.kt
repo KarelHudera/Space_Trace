@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.presentation.theme
+package karel.hudera.spacetrace.presentation.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

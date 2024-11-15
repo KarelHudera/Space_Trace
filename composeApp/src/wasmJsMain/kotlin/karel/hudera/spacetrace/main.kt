@@ -10,6 +10,6 @@ fun main() {
     initKoin {}
 
     ComposeViewport(document.body!!) {
-        App()
+        App(disableDiskCache = true)
     }
 }

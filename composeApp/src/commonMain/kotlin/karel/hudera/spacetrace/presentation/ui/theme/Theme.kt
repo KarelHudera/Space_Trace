@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.presentation.theme
+package karel.hudera.spacetrace.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

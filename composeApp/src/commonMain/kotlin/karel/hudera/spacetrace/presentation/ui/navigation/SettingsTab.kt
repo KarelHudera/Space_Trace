@@ -1,30 +1,34 @@
-package karel.hudera.spacetrace.presentation
+package karel.hudera.spacetrace.presentation.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import karel.hudera.spacetrace.presentation.ui.features.settings.SettingsScreen
 import org.jetbrains.compose.resources.painterResource
 import spacetrace.composeapp.generated.resources.Res
-import spacetrace.composeapp.generated.resources.rocket
+import spacetrace.composeapp.generated.resources.settings
 
-object RocketLaunchScreen : Tab {
+object SettingsTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
-            val title = "Rockets"
-            val icon = painterResource(Res.drawable.rocket)
+            val title = "Settings"
+            val icon = painterResource(Res.drawable.settings)
 
 
             return remember {
                 TabOptions(
-                    index = 1u,
+                    index = 2u,
                     title = title,
                     icon = icon,
                 )
             }
         }
+
     @Composable
     override fun Content() {
+        Navigator(SettingsScreen())
     }
 }

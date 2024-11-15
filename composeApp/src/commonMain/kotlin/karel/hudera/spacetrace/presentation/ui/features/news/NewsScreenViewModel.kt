@@ -1,0 +1,53 @@
+package karel.hudera.spacetrace.presentation.ui.features.news
+
+import cafe.adriel.voyager.core.model.screenModelScope
+import io.github.aakira.napier.Napier
+import karel.hudera.spacetrace.domain.interactors.GetPictureUseCase
+import karel.hudera.spacetrace.presentation.model.ResourceUiState
+import karel.hudera.spacetrace.presentation.mvi.BaseViewModel
+import kotlinx.coroutines.launch
+
+class NewsScreenViewModel(
+    private val getPictureUseCase: GetPictureUseCase,
+) : BaseViewModel<NewsScreenContract.Event, NewsScreenContract.State, NewsScreenContract.Effect>() {
+
+    init {
+        Napier.i("\uD83D\uDFE2 NewsScreenViewModel initialized")
+        getPicture()
+    }
+
+    override fun createInitialState(): NewsScreenContract.State =
+        NewsScreenContract.State(picture = ResourceUiState.Idle)
+
+    override fun handleEvent(event: NewsScreenContract.Event) {
+        when (event) {
+            NewsScreenContract.Event.OnTryCheckAgainClick -> getPicture()
+        }
+    }
+
+    private fun getPicture() {
+        Napier.i("\uD83D\uDFE2 Fetching picture started")
+        setState { copy(picture = ResourceUiState.Loading) }
+        screenModelScope.launch {
+            getPictureUseCase(Unit)
+                .onSuccess {
+                    setState {
+                        copy(
+                            picture = if (it.url.isEmpty())
+                                ResourceUiState.Empty.also {
+                                    Napier.i("\uD83D\uDFE1 Picture data is empty")
+                                }
+                            else
+                                ResourceUiState.Success(it).also {
+                                    Napier.i("\uD83D\uDFE2 Picture data successfully loaded")
+                                }
+                        )
+                    }
+                }
+                .onFailure { error ->
+                    Napier.e("\uD83D\uDD34 Picture fetch failed: ${error.message}", error)
+                    setState { copy(picture = ResourceUiState.Error()) }
+                }
+        }
+    }
+}
