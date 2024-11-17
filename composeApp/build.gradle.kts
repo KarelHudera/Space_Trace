@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinx.serialization)
+//    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -40,6 +41,11 @@ kotlin {
 
     jvm("desktop")
 
+    js {
+        browser()
+        binaries.executable()
+    }
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -53,12 +59,14 @@ kotlin {
 
     sourceSets {
         val desktopMain by getting
+        val jsMain by getting
 
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
             implementation(libs.koin.android)
+//            implementation(libs.sqlDelight.driver.android)
         }
 
         commonMain.dependencies {
@@ -104,20 +112,41 @@ kotlin {
 
             // Icons packs
             implementation(libs.composeIcons.evaIcons)
+
+            // SQL extensions
+//            implementation(libs.sqlDelight.extensions)
         }
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.cio)
+//            implementation(libs.sqlDelight.driver.sqlite)
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+//            implementation(libs.sqlDelight.driver.native)
+        }
+
+
+        jsMain.dependencies {
+            implementation(libs.ktor.client.js)
+            implementation(compose.html.core)
+//            implementation(libs.sqlDelight.driver.sqljs)
+//            implementation(npm("sql.js", "1.6.2"))
+//            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+
         }
 
         wasmJsMain.dependencies {
             implementation(libs.ktor.client.js)
+            ///  implementation(libs.sqlDelight.driver.sqljs)
+            // implementation(libs.web.worker.driver)
+            //implementation(npm("sql.js", "1.6.2"))
+            //   implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+            // implementation(compose.html.core)
+
         }
     }
 }
@@ -171,3 +200,16 @@ compose.desktop {
         }
     }
 }
+
+compose.experimental {
+    web.application {}
+}
+
+//sqldelight {
+//    databases {
+//        create("Database") {
+//            packageName.set("karel.hudera.spacetrace.data_cache.sqldelight")
+//            generateAsync.set(true)
+//        }
+//    }
+//}
