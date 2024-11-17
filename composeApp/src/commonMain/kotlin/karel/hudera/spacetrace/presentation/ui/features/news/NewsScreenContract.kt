@@ -1,5 +1,6 @@
 package karel.hudera.spacetrace.presentation.ui.features.news
 
+import karel.hudera.spacetrace.domain.model.Article
 import karel.hudera.spacetrace.domain.model.Picture
 import karel.hudera.spacetrace.presentation.model.ResourceUiState
 import karel.hudera.spacetrace.presentation.mvi.UiEffect
@@ -13,7 +14,8 @@ interface NewsScreenContract {
     }
 
     data class State(
-        val picture: ResourceUiState<Picture>
+        val picture: ResourceUiState<Picture>,
+        val article: ResourceUiState<List<Article>>
     ) : UiState
 
     sealed interface Effect : UiEffect {
