@@ -1,19 +1,40 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.multiplatform)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlinx.serialization)
-//    alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.buildConfig)
+}
+
+repositories {
+    google()
+    mavenCentral()
 }
 
 kotlin {
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    androidTarget {
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
+
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
+    }
+
+    jvmToolchain(23)
+
+    jvm("desktop")
+
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         moduleName = "composeApp"
@@ -31,15 +52,6 @@ kotlin {
         }
         binaries.executable()
     }
-
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-        }
-    }
-
-    jvm("desktop")
 
     js {
         browser()
@@ -66,7 +78,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
             implementation(libs.koin.android)
-//            implementation(libs.sqlDelight.driver.android)
+            implementation(libs.sqlDelight.driver.android)
         }
 
         commonMain.dependencies {
@@ -114,39 +126,39 @@ kotlin {
             implementation(libs.composeIcons.evaIcons)
 
             // SQL extensions
-//            implementation(libs.sqlDelight.extensions)
+            implementation(libs.sqlDelight.extensions)
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
+            implementation(libs.kotlinx.coroutines.test)
         }
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.cio)
-//            implementation(libs.sqlDelight.driver.sqlite)
+            implementation(libs.sqlDelight.driver.sqlite)
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
-//            implementation(libs.sqlDelight.driver.native)
+            implementation(libs.sqlDelight.driver.native)
         }
-
 
         jsMain.dependencies {
             implementation(libs.ktor.client.js)
             implementation(compose.html.core)
-//            implementation(libs.sqlDelight.driver.sqljs)
-//            implementation(npm("sql.js", "1.6.2"))
-//            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
-
+            implementation(libs.web.worker.driver)
+            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
         }
 
         wasmJsMain.dependencies {
             implementation(libs.ktor.client.js)
-            ///  implementation(libs.sqlDelight.driver.sqljs)
-            // implementation(libs.web.worker.driver)
-            //implementation(npm("sql.js", "1.6.2"))
-            //   implementation(devNpm("copy-webpack-plugin", "9.1.0"))
-            // implementation(compose.html.core)
-
+            implementation(libs.web.worker.driver)
+            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
         }
     }
 }
@@ -189,6 +201,11 @@ android {
     }
 }
 
+dependencies {
+    androidTestImplementation(libs.androidx.uitest.junit4)
+    debugImplementation(libs.androidx.uitest.testManifest)
+}
+
 compose.desktop {
     application {
         mainClass = "karel.hudera.spacetrace.MainKt"
@@ -196,20 +213,37 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "karel.hudera.spacetrace"
-            packageVersion = "1.0.0"
+            packageVersion = System.getenv("APP_VERSION") ?: "1.0.0"
+
+            val iconBasePath = "src/desktopMain/resources/desktopAppIcons"
+            linux {
+                iconFile.set(project.file("$iconBasePath/LinuxIcon.png"))
+            }
+            windows {
+                iconFile.set(project.file("$iconBasePath/WindowsIcon.ico"))
+            }
+            macOS {
+                iconFile.set(project.file("$iconBasePath/MacosIcon.icns"))
+                bundleID = "karel.hudera.spacetrace.desktopApp"
+            }
         }
     }
 }
 
 compose.experimental {
-    web.application {}
+    // not needed anymore
 }
 
-//sqldelight {
-//    databases {
-//        create("Database") {
-//            packageName.set("karel.hudera.spacetrace.data_cache.sqldelight")
-//            generateAsync.set(true)
-//        }
-//    }
-//}
+buildConfig {
+    // BuildConfig configuration here.
+    // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
+}
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("karel.hudera.spacetrace.data_cache.sqldelight")
+            generateAsync.set(true)
+        }
+    }
+}
