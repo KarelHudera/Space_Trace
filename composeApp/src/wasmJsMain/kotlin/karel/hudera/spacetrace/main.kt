@@ -9,7 +9,8 @@ import kotlinx.browser.document
 fun main() {
     initKoin {}
 
-    ComposeViewport(document.body!!) {
+    val body = document.body ?: return
+    ComposeViewport(body) {
         App(disableDiskCache = true)
     }
 }
