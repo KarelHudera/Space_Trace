@@ -1,5 +1,7 @@
 package karel.hudera.spacetrace
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -26,4 +28,10 @@ fun main() = application {
     ) {
         App()
     }
+}
+
+@Preview
+@Composable
+fun AppPreview() {
+    App()
 }
