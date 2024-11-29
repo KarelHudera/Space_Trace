@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.data_remote
+package karel.hudera.spacetrace.data_remote.httpRequestBuilders
 
 // NASA API
 const val NASA_API_BASE_URL = "https://api.nasa.gov/"
@@ -10,7 +10,7 @@ const val SPACE_DEVS_API_BASE_URL = "https://ll.thespacedevs.com/$SPACE_DEVS_API
 
 // Spaceflight News API
 private const val SPACEFLIGHT_NEWS_API_VERSION = "v4"
-const val SPACEFLIGHT_NEWS_API_BASE_URL = "https://api.spaceflightnewsapi.net/$SPACEFLIGHT_NEWS_API_VERSION/"
+const val SPACEFLIGHT_NEWS_API_BASE_URL = "https://api.spaceflightnewsapi.net/"
 const val SPACEFLIGHT_ARTICLES = "articles"
 
 // SpaceX API

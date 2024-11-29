@@ -22,6 +22,7 @@ val httpClientModule = module {
 
     single {
         HttpClient(nativeEngine) {
+
             install(ContentNegotiation) {
                 json(
                     Json {
@@ -31,6 +32,7 @@ val httpClientModule = module {
                     }
                 )
             }
+
             install(Logging) {
                 logger = object : Logger {
                     override fun log(message: String) {
@@ -39,12 +41,15 @@ val httpClientModule = module {
                 }
                 level = LogLevel.ALL
             }
+
             install(HttpCache)
+
             install(ResponseObserver) {
                 onResponse { response ->
                     Napier.d("HTTP status: ${response.status.value}", tag = "Napier")
                 }
             }
+
             install(DefaultRequest) {
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
             }
