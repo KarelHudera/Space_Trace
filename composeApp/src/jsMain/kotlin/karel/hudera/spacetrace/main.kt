@@ -1,6 +1,5 @@
 package karel.hudera.spacetrace
 
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
 import karel.hudera.spacetrace.di.initKoin
@@ -12,19 +11,9 @@ fun main() {
     initKoin {}
 
     onWasmReady {
-        ComposeViewport(document.body!!) {
-            CompositionLocalProvider{
-                App(disableDiskCache = true)
-            }
+        val body = document.body ?: return@onWasmReady
+        ComposeViewport(body) {
+            App(disableDiskCache = true)
         }
     }
 }
-
-//fun main() {
-//    initKoin {}
-//    onWasmReady {
-//        BrowserViewportWindow("Rick N Morty KMM") {
-//            App()
-//        }
-//    }
-//}
