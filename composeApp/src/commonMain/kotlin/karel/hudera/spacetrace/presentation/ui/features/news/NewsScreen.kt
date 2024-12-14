@@ -1,5 +1,6 @@
 package karel.hudera.spacetrace.presentation.ui.features.news
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +26,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import karel.hudera.spacetrace.presentation.ui.common.ActionAppBar
 import karel.hudera.spacetrace.presentation.ui.common.ImageCard
+import karel.hudera.spacetrace.presentation.ui.features.articleDetail.ArticleDetailScreen
 import karel.hudera.spacetrace.presentation.ui.state.ResourceUiStateManager
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.compose.koinInject
@@ -46,7 +48,8 @@ class NewsScreen() : Screen {
         LaunchedEffect(key1 = Unit) {
             viewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    else -> {}
+                    is NewsContract.Effect.NavigateToArticleDetail ->  navigator.push(ArticleDetailScreen())
+                    NewsContract.Effect.NavigateToFavorites -> TODO()
                 }
             }
         }
@@ -62,8 +65,8 @@ class NewsScreen() : Screen {
                     successView = {
                         ImageCard(it)
                     },
-                    onCheckAgain = { viewModel.setEvent(NewsScreenContract.Event.OnTryCheckAgainClick) },
-                    onTryAgain = { viewModel.setEvent(NewsScreenContract.Event.OnTryCheckAgainClick) }
+                    onCheckAgain = { viewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
+                    onTryAgain = { viewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) }
                 )
                 ResourceUiStateManager(
                     modifier = Modifier.fillMaxWidth().heightIn(min = 0.dp, max = 900.dp),
@@ -75,10 +78,12 @@ class NewsScreen() : Screen {
                                 key = { it.id }
                             ) {
                                 Card(
-                                    modifier = Modifier.padding(
-                                        vertical = 8.dp,
-                                        horizontal = 16.dp
-                                    ),
+                                    modifier = Modifier
+                                        .padding(
+                                            vertical = 8.dp,
+                                            horizontal = 16.dp
+                                        )
+                                        .clickable { viewModel.setEvent(NewsContract.Event.OnArticleClick(it.id)) },
                                     elevation = CardDefaults.cardElevation(
                                         defaultElevation = 1.dp
                                     )
@@ -88,8 +93,8 @@ class NewsScreen() : Screen {
                             }
                         }
                     },
-                    onCheckAgain = { viewModel.setEvent(NewsScreenContract.Event.OnTryCheckAgainClick) },
-                    onTryAgain = { viewModel.setEvent(NewsScreenContract.Event.OnTryCheckAgainClick) }
+                    onCheckAgain = { viewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
+                    onTryAgain = { viewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) }
                 )
             }
         }

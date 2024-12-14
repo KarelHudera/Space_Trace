@@ -34,7 +34,7 @@ class RemoteDataImp(
             }.body<ApiArticle>().apiArticleResults
         )
 
-    override suspend fun getArticleFromApi(articleId: String): Article =
+    override suspend fun getArticleFromApi(articleId: Int): Article =
         apiArticleMapper.map(
             httpClient.get {
                 urlSpaceflightNews("articles/${articleId}")

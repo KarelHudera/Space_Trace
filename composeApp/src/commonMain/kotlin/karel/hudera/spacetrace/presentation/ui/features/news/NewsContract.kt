@@ -7,10 +7,11 @@ import karel.hudera.spacetrace.presentation.mvi.UiEffect
 import karel.hudera.spacetrace.presentation.mvi.UiEvent
 import karel.hudera.spacetrace.presentation.mvi.UiState
 
-interface NewsScreenContract {
+interface NewsContract {
     sealed interface Event : UiEvent {
         data object OnTryCheckAgainClick : Event
-
+        data object OnFavoritesClick : Event
+        data class OnArticleClick(val articleId: Int) : Event
     }
 
     data class State(
@@ -19,6 +20,7 @@ interface NewsScreenContract {
     ) : UiState
 
     sealed interface Effect : UiEffect {
-
+        data class NavigateToArticleDetail(val articleId: Int) : Effect
+        data object NavigateToFavorites : Effect
     }
 }
