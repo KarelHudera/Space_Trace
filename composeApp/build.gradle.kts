@@ -152,12 +152,15 @@ kotlin {
             implementation(libs.ktor.client.js)
             implementation(compose.html.core)
             implementation(libs.web.worker.driver)
+            implementation(npm("sql.js", "1.6.2"))
             implementation(devNpm("copy-webpack-plugin", "9.1.0"))
         }
 
         wasmJsMain.dependencies {
             implementation(libs.ktor.client.js)
             implementation(libs.web.worker.driver)
+            implementation(libs.sqlDelight.driver.sqljs)
+            implementation(npm("sql.js", "1.6.2"))
             implementation(devNpm("copy-webpack-plugin", "9.1.0"))
         }
     }
