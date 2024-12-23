@@ -1,10 +1,8 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -35,24 +33,6 @@ kotlin {
 
     jvm("desktop")
 
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            val projectDirPath = project.projectDir.path
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(projectDirPath)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }
-
     js {
         browser()
         binaries.executable()
@@ -76,9 +56,13 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.core.splashscreen)
             implementation(libs.ktor.client.android)
             implementation(libs.koin.android)
             implementation(libs.sqlDelight.driver.android)
+
+            // Logging library
+            implementation(libs.napier)
         }
 
         commonMain.dependencies {
@@ -134,6 +118,9 @@ kotlin {
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.uiTest)
             implementation(libs.kotlinx.coroutines.test)
+
+            // Logging library
+            implementation(libs.napier)
         }
 
         desktopMain.dependencies {
@@ -141,27 +128,29 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.cio)
             implementation(libs.sqlDelight.driver.sqlite)
+
+            // Logging library
+            implementation(libs.napier)
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqlDelight.driver.native)
+
+            // Logging library
+            implementation(libs.napier)
         }
 
         jsMain.dependencies {
             implementation(libs.ktor.client.js)
             implementation(compose.html.core)
-            implementation(libs.web.worker.driver)
-            implementation(npm("sql.js", "1.6.2"))
-            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
-        }
-
-        wasmJsMain.dependencies {
-            implementation(libs.ktor.client.js)
-            implementation(libs.web.worker.driver)
+            // implementation(libs.web.worker.driver)
             implementation(libs.sqlDelight.driver.sqljs)
             implementation(npm("sql.js", "1.6.2"))
             implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+
+            // Logging library
+            implementation(libs.napier)
         }
     }
 }
@@ -233,10 +222,6 @@ compose.desktop {
     }
 }
 
-compose.experimental {
-    // not needed anymore
-}
-
 buildConfig {
     // BuildConfig configuration here.
     // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
@@ -244,8 +229,9 @@ buildConfig {
 
 sqldelight {
     databases {
-        create("Database") {
+        create("ArticleDatabase") {
             packageName.set("karel.hudera.spacetrace.data_cache.sqldelight")
+            sourceFolders.set(listOf("kotlin"))
             generateAsync.set(true)
         }
     }

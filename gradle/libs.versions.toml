@@ -1,16 +1,15 @@
 [versions]
-agp = "8.4.2"
+agp = "8.7.3"
 android-compileSdk = "34"
 android-minSdk = "26"
 android-targetSdk = "34"
 androidx-activityCompose = "1.9.3"
-androidx-lifecycle = "2.8.3"
-androidx-uiTest = "1.7.5"
-coilCompose = "3.0.0-rc02"
-coilNetworkKtor3 = "3.0.2"
-compose = "1.7.0"
+androidx-lifecycle = "2.8.4"
+androidx-uiTest = "1.7.6"
+coil = "3.0.3"
+compose = "1.7.1"
 composeIcons = "1.1.1"
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 kotlinx-coroutines = "1.9.0"
 napier = "2.7.1"
 voyager = "1.1.0-beta02"
@@ -18,8 +17,9 @@ kotlinx-serialization = "1.7.3"
 kotlinx-datetime = "0.6.1"
 ktor = "3.0.1"
 koin = "4.0.0"
-sqlDelight = "2.0.2"
+sqlDelight = "2.0.0-alpha05"
 buildConfig = "5.5.0"
+splashscreen = "1.0.1"
 
 [libraries]
 # Core libraries
@@ -30,10 +30,11 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 # AndroidX libraries
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
 # Compose libraries
-coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
-coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coilNetworkKtor3" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 
 # Coroutine libraries
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
