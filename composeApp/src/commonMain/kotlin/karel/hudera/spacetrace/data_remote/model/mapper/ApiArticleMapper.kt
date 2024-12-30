@@ -10,7 +10,7 @@ class ApiArticleMapper : Mapper<ApiArticleResult, Article>() {
         Article(
             apiEvents,
             featured,
-            id,
+            id.toLong(),
             imageUrl,
             apiLaunches,
             newsSite,

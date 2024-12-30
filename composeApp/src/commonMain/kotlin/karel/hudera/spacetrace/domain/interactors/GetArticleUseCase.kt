@@ -8,6 +8,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 class GetArticleUseCase(
     private val repository: IRepository,
     dispatcher: CoroutineDispatcher,
-) : BaseUseCase<Int, Article>(dispatcher){
-    override suspend fun block(param: Int): Article = repository.getArticle(param)
+) : BaseUseCase<Long, Article>(dispatcher){
+    override suspend fun block(param: Long): Article = repository.getArticle(param)
 }

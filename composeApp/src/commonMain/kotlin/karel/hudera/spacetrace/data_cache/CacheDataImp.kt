@@ -26,10 +26,9 @@ class CacheDataImp(
         }
     }
 
-
-    override suspend fun removeArticleFromFavorite(articleId: Int) =
+    override suspend fun removeArticleFromFavorite(articleId: Long) =
         sharedDatabase {
-            it.appDatabaseQueries.removeFavoriteArticle(articleId.toLong())
+            it.appDatabaseQueries.removeFavoriteArticle(articleId)
         }
 
     override suspend fun getAllFavoriteArticles(): Flow<List<Article>> =
@@ -38,9 +37,9 @@ class CacheDataImp(
                 .map { it.executeAsList() }
         }
 
-    override suspend fun isArticleFavorite(articleId: Int): Boolean =
+    override suspend fun isArticleFavorite(articleId: Long): Boolean =
         sharedDatabase {
-            it.appDatabaseQueries.selectFavoriteArticleById(articleId.toLong()).executeAsOne()
+            it.appDatabaseQueries.selectFavoriteArticleById(articleId).executeAsOne()
         }
 
     private fun mapFavorite(

@@ -144,10 +144,11 @@ kotlin {
         jsMain.dependencies {
             implementation(libs.ktor.client.js)
             implementation(compose.html.core)
-            // implementation(libs.web.worker.driver)
-            implementation(libs.sqlDelight.driver.sqljs)
-            implementation(npm("sql.js", "1.6.2"))
-            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+         //   TODO()
+//             implementation(libs.web.worker.driver)
+//             implementation(libs.sqlDelight.driver.sqljs)
+//            implementation(npm("sql.js", "1.6.2"))
+//            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
 
             // Logging library
             implementation(libs.napier)
@@ -229,10 +230,8 @@ buildConfig {
 
 sqldelight {
     databases {
-        create("ArticleDatabase") {
-            packageName.set("karel.hudera.spacetrace.data_cache.sqldelight")
-            sourceFolders.set(listOf("kotlin"))
-            generateAsync.set(true)
+        create("AppDatabase") {
+            packageName.set("karel.hudera.spacetrace.db")
         }
     }
 }

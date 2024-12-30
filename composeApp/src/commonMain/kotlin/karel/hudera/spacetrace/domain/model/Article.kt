@@ -8,7 +8,7 @@ import karel.hudera.spacetrace.data_remote.model.apiArticle.ApiLaunch
 data class Article(
     val events: List<ApiEvent>,
     val featured: Boolean,
-    val id: Int,
+    val id: Long,
     val imageUrl: String,
     val launches: List<ApiLaunch>,
     val newsSite: String,

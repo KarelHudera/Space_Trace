@@ -7,8 +7,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 class SwitchArticleFavoriteUseCase(
     private val repository: IRepository,
     dispatcher: CoroutineDispatcher,
-) : BaseUseCase<Int, Boolean>(dispatcher) {
-    override suspend fun block(param: Int): Boolean {
+) : BaseUseCase<Long, Boolean>(dispatcher) {
+    override suspend fun block(param: Long): Boolean {
         if (repository.isArticleFavorite(param)) {
             repository.removeArticleFromFavorites(param)
         } else {
