@@ -5,7 +5,7 @@ import androidx.compose.runtime.remember
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import karel.hudera.spacetrace.presentation.ui.features.news.NewsScreen
+import karel.hudera.spacetrace.presentation.ui.screens.news.NewsScreen
 import org.jetbrains.compose.resources.painterResource
 import spacetrace.composeapp.generated.resources.Res
 import spacetrace.composeapp.generated.resources.globe
@@ -13,6 +13,7 @@ import spacetrace.composeapp.generated.resources.globe
 object NewsTab : Tab {
 
     override val options: TabOptions
+
         @Composable
         get() {
             val title = "News"

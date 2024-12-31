@@ -1,8 +1,6 @@
 package karel.hudera.spacetrace.presentation.ui.navigation
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,13 +26,8 @@ import spacetrace.composeapp.generated.resources.settings_full
 fun ViewHolder() {
     TabNavigator(NewsTab) {
         Scaffold(
-            content = { innerPadding ->
-                Box(
-                    modifier = Modifier
-                        .padding(innerPadding),
-                ) {
-                    CurrentTab()
-                }
+            content = {
+                CurrentTab()
             },
             bottomBar = {
                 NavigationBar {

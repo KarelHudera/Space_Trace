@@ -15,6 +15,6 @@ fun initLogger() {
         Napier.base(DebugAntilog())
         val platformName = PlatformInfo().getPlatformName()
         Napier.i("\uD83D\uDFE2 App started on platform: $platformName")
-        print("\uD83D\uDFE2 App started on platform: $platformName")
+        println("\uD83D\uDFE2 App started on platform: $platformName")
     }
 }

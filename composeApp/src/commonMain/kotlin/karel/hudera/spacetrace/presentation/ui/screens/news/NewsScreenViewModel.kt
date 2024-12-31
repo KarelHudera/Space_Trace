@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class NewsScreenViewModel(
     private val getPictureUseCase: GetPictureUseCase,
     private val getArticlesUseCase: GetArticlesUseCase
-) : BaseViewModel<NewsScreenContract.Event, NewsScreenContract.State, NewsScreenContract.Effect>() {
+) : BaseViewModel<NewsContract.Event, NewsContract.State, NewsContract.Effect>() {
 
     init {
         Napier.i("\uD83D\uDFE2 NewsScreenViewModel initialized")
@@ -19,12 +19,22 @@ class NewsScreenViewModel(
         getArticles()
     }
 
-    override fun createInitialState(): NewsScreenContract.State =
-        NewsScreenContract.State(picture = ResourceUiState.Idle, article = ResourceUiState.Idle)
+    override fun createInitialState(): NewsContract.State =
+        NewsContract.State(
+            picture = ResourceUiState.Idle,
+            article = ResourceUiState.Idle
+        )
 
-    override fun handleEvent(event: NewsScreenContract.Event) {
+    override fun handleEvent(event: NewsContract.Event) {
         when (event) {
-            NewsScreenContract.Event.OnTryCheckAgainClick -> getPicture()
+            NewsContract.Event.OnTryCheckAgainClick -> getPicture()
+            is NewsContract.Event.OnArticleClick -> setEffect {
+                NewsContract.Effect.NavigateToArticleDetail(
+                    event.articleId
+                )
+            }
+
+            NewsContract.Event.OnFavoritesClick -> setEffect { NewsContract.Effect.NavigateToFavorites }
         }
     }
 
@@ -64,11 +74,11 @@ class NewsScreenViewModel(
                         copy(
                             article = if (it.isEmpty())
                                 ResourceUiState.Empty.also {
-                                    Napier.i("\uD83D\uDFE1 Picture data is empty")
+                                    Napier.i("\uD83D\uDFE1 Articles data is empty")
                                 }
                             else
                                 ResourceUiState.Success(it).also {
-                                    Napier.i("\uD83D\uDFE2 Picture data successfully loaded")
+                                    Napier.i("\uD83D\uDFE2 Articles data successfully loaded")
                                 }
                         )
                     }

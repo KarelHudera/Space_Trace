@@ -7,5 +7,5 @@ import karel.hudera.spacetrace.domain.model.Picture
 interface IRemoteData {
     suspend fun getPictureFromApi(): Picture
     suspend fun getArticlesFromApi(): List<Article>
-    suspend fun getArticleFromApi(articleId: String): Article
+    suspend fun getArticleFromApi(articleId: Long): Article
 }

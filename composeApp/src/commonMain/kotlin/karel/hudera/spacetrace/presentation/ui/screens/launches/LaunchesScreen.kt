@@ -1,11 +1,11 @@
-package karel.hudera.spacetrace.presentation.ui.features.settings
+package karel.hudera.spacetrace.presentation.ui.screens.launches
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 
-class SettingsScreen() : Screen {
+class LaunchesScreen() : Screen {
     override val key: ScreenKey = uniqueScreenKey
 
     @Composable

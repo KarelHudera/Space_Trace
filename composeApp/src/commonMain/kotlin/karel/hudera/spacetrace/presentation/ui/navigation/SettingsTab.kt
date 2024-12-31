@@ -5,7 +5,7 @@ import androidx.compose.runtime.remember
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import karel.hudera.spacetrace.presentation.ui.features.settings.SettingsScreen
+import karel.hudera.spacetrace.presentation.ui.screens.settings.SettingsScreen
 import org.jetbrains.compose.resources.painterResource
 import spacetrace.composeapp.generated.resources.Res
 import spacetrace.composeapp.generated.resources.settings
