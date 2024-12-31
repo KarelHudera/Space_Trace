@@ -1,0 +1,23 @@
+CREATE TABLE FavoriteArticles(
+    id INTEGER NOT NULL,
+    imageUrl TEXT NOT NULL,
+    newsSite TEXT NOT NULL,
+    publishedAt TEXT NOT NULL,
+    summary TEXT NOT NULL,
+    title TEXT NOT NULL,
+    updatedAt TEXT NOT NULL,
+    url TEXT NOT NULL
+);
+
+insertFavoriteArticle:
+INSERT INTO FavoriteArticles(id, imageUrl, newsSite, publishedAt, summary, title, updatedAt, url)
+VALUES (?,?,?,?,?,?,?,?);
+
+removeFavoriteArticle:
+DELETE FROM FavoriteArticles WHERE id = ?;
+
+selectFavoriteArticles:
+SELECT * FROM FavoriteArticles;
+
+selectFavoriteArticleById:
+SELECT EXISTS(SELECT 1 FROM FavoriteArticles WHERE id = ? LIMIT 1);
