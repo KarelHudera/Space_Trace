@@ -1,6 +1,7 @@
 package karel.hudera.spacetrace
 
 import androidx.compose.runtime.Composable
+import karel.hudera.spacetrace.platform.initPermissionController
 import karel.hudera.spacetrace.presentation.ui.navigation.ViewHolder
 import karel.hudera.spacetrace.presentation.ui.theme.AppTheme
 import karel.hudera.spacetrace.utils.initImageLoader
@@ -18,11 +19,15 @@ import org.koin.compose.KoinContext
  */
 @Composable
 internal fun App(disableDiskCache: Boolean = false) = KoinContext {
+
     // Initialize Napier for logging with DebugAntilog
     initLogger()
 
     // Configure and initialize the global Coil ImageLoader instance
     initImageLoader(disableDiskCache)
+
+    // for notifications
+    initPermissionController().RequestUserPermissions()
 
     // Apply app theme and load main content view
     AppTheme {
