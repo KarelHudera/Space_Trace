@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.presentation.ui.features.news
+package karel.hudera.spacetrace.presentation.ui.screens.news
 
 import karel.hudera.spacetrace.domain.model.Article
 import karel.hudera.spacetrace.domain.model.Picture
@@ -11,7 +11,7 @@ interface NewsContract {
     sealed interface Event : UiEvent {
         data object OnTryCheckAgainClick : Event
         data object OnFavoritesClick : Event
-        data class OnArticleClick(val articleId: Int) : Event
+        data class OnArticleClick(val articleId: Long) : Event
     }
 
     data class State(
@@ -20,7 +20,7 @@ interface NewsContract {
     ) : UiState
 
     sealed interface Effect : UiEffect {
-        data class NavigateToArticleDetail(val articleId: Int) : Effect
+        data class NavigateToArticleDetail(val articleId: Long) : Effect
         data object NavigateToFavorites : Effect
     }
 }

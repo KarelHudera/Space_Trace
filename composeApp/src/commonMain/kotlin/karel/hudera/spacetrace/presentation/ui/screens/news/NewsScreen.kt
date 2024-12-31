@@ -31,7 +31,7 @@ class NewsScreen : Screen {
 
     @Composable
     override fun Content() {
-        val viewModel: NewsScreenViewModel = koinViewModel()
+        val viewModel: NewsViewModel = koinViewModel()
 
         val state by viewModel.uiState.collectAsState()
 

@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.presentation.ui.features.news
+package karel.hudera.spacetrace.presentation.ui.screens.news
 
 import cafe.adriel.voyager.core.model.screenModelScope
 import io.github.aakira.napier.Napier
@@ -8,7 +8,7 @@ import karel.hudera.spacetrace.presentation.model.ResourceUiState
 import karel.hudera.spacetrace.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.launch
 
-class NewsScreenViewModel(
+class NewsViewModel(
     private val getPictureUseCase: GetPictureUseCase,
     private val getArticlesUseCase: GetArticlesUseCase
 ) : BaseViewModel<NewsContract.Event, NewsContract.State, NewsContract.Effect>() {
