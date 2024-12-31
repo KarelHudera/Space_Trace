@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.presentation.ui.features.articleDetail
+package karel.hudera.spacetrace.presentation.ui.screens.articleDetail
 
 import cafe.adriel.voyager.core.model.screenModelScope
 import io.github.aakira.napier.Napier
@@ -13,7 +13,7 @@ class ArticleDetailViewModel(
     private val getArticleUseCase: GetArticleUseCase,
     private val isArticleFavoriteUseCase: IsArticleFavoriteUseCase,
     private val switchArticleFavoriteUseCase: SwitchArticleFavoriteUseCase,
-    private val articleId: Int
+    private val articleId: Long
 ) : BaseViewModel<ArticleDetailContract.Event, ArticleDetailContract.State, ArticleDetailContract.Effect>() {
 
     init {
@@ -36,7 +36,7 @@ class ArticleDetailViewModel(
         }
     }
 
-    private fun getArticle(articleId: Int) {
+    private fun getArticle(articleId: Long) {
         Napier.i("\uD83D\uDFE2 Fetching article started")
         setState { copy(article = ResourceUiState.Loading) }
         screenModelScope.launch {
@@ -62,16 +62,20 @@ class ArticleDetailViewModel(
         }
     }
 
-    private fun checkIfIsFavorite(articleId: Int) {
+    private fun checkIfIsFavorite(articleId: Long) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         screenModelScope.launch {
             isArticleFavoriteUseCase(articleId)
-                .onSuccess { setState { copy(isFavorite = ResourceUiState.Success(it)) } }
-                .onFailure { setState { copy(isFavorite = ResourceUiState.Error()) } }
+                .onSuccess {
+                    setState { copy(isFavorite = ResourceUiState.Success(it)) }
+                }
+                .onFailure {
+                    setState { copy(isFavorite = ResourceUiState.Error()) }
+                }
         }
     }
 
-    private fun switchArticleFavorite(articleId: Int) {
+    private fun switchArticleFavorite(articleId: Long) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         screenModelScope.launch {
             switchArticleFavoriteUseCase(articleId)

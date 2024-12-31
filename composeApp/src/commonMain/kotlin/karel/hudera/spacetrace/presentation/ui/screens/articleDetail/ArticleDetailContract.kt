@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.presentation.ui.features.articleDetail
+package karel.hudera.spacetrace.presentation.ui.screens.articleDetail
 
 import karel.hudera.spacetrace.domain.model.Article
 import karel.hudera.spacetrace.presentation.model.ResourceUiState

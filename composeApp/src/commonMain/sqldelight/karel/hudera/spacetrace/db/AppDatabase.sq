@@ -10,7 +10,8 @@ CREATE TABLE FavoriteArticles(
 );
 
 insertFavoriteArticle:
-INSERT INTO FavoriteArticles(id, imageUrl, newsSite, publishedAt, summary, title, updatedAt, url) VALUES (?,?,?,?,?,?,?,?);
+INSERT INTO FavoriteArticles(id, imageUrl, newsSite, publishedAt, summary, title, updatedAt, url)
+VALUES (?,?,?,?,?,?,?,?);
 
 removeFavoriteArticle:
 DELETE FROM FavoriteArticles WHERE id = ?;
