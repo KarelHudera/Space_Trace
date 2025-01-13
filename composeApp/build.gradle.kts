@@ -224,8 +224,7 @@ compose.desktop {
 }
 
 buildConfig {
-    // BuildConfig configuration here.
-    // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
+    buildConfigField("String", "APP_VERSION", "\"${android.defaultConfig.versionName}\"")
 }
 
 sqldelight {

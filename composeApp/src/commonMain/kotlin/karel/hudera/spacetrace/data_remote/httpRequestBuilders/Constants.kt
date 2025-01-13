@@ -6,7 +6,7 @@ const val NASA_APOD = "planetary/apod"
 
 // Space Devs API
 private const val SPACE_DEVS_API_VERSION = "2.3.0"
-const val SPACE_DEVS_API_BASE_URL = "https://ll.thespacedevs.com/$SPACE_DEVS_API_VERSION/"
+const val SPACE_DEVS_API_BASE_URL = "https://ll.thespacedevs.com/"
 
 // Spaceflight News API
 private const val SPACEFLIGHT_NEWS_API_VERSION = "v4"

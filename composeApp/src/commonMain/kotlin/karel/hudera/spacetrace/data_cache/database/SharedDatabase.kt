@@ -1,4 +1,4 @@
-package karel.hudera.spacetrace.data_cache.sqldelight
+package karel.hudera.spacetrace.data_cache.database
 
 import karel.hudera.spacetrace.db.AppDatabase
 import karel.hudera.spacetrace.platform.DatabaseDriverFactory

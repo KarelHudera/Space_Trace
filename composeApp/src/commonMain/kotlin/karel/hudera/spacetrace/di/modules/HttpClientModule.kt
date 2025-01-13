@@ -26,6 +26,7 @@ val httpClientModule = module {
             install(ContentNegotiation) {
                 json(
                     Json {
+                        allowSpecialFloatingPointValues = true
                         ignoreUnknownKeys = true
                         prettyPrint = true
                         isLenient = true
