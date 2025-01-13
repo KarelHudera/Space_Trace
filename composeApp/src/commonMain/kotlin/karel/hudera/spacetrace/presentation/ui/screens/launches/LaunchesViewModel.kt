@@ -12,8 +12,8 @@ class LaunchesViewModel(
 ) : BaseViewModel<LaunchesContract.Event, LaunchesContract.State, LaunchesContract.Effect>() {
 
     init {
-        Napier.i("\uD83D\uDFE2 NewsScreenViewModel initialized")
-        getPicture()
+        Napier.i("\uD83D\uDFE2 LaunchesViewModel initialized")
+        getLaunches()
     }
 
     override fun createInitialState(): LaunchesContract.State =
@@ -24,11 +24,11 @@ class LaunchesViewModel(
     override fun handleEvent(event: LaunchesContract.Event) {
         when (event) {
             is LaunchesContract.Event.OnLaunchClick -> TODO()
-            LaunchesContract.Event.OnTryCheckAgainClick -> TODO()
+            LaunchesContract.Event.OnTryCheckAgainClick -> getLaunches()
         }
     }
 
-    private fun getPicture() {
+    private fun getLaunches() {
         Napier.i("\uD83D\uDFE2 Fetching launches started")
         setState { copy(launch = ResourceUiState.Loading) }
         screenModelScope.launch {
