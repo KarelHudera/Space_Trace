@@ -1,7 +1,7 @@
 package karel.hudera.spacetrace.data_cache
 
 import app.cash.sqldelight.coroutines.asFlow
-import karel.hudera.spacetrace.data_cache.sqldelight.SharedDatabase
+import karel.hudera.spacetrace.data_cache.database.SharedDatabase
 import karel.hudera.spacetrace.domain.model.Article
 import karel.hudera.spacetrace.repository.ICacheData
 import kotlinx.coroutines.flow.Flow

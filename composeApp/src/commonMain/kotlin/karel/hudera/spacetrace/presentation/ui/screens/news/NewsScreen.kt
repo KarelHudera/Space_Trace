@@ -17,6 +17,9 @@ import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import compose.icons.EvaIcons
+import compose.icons.evaicons.Fill
+import compose.icons.evaicons.fill.Star
 import karel.hudera.spacetrace.di.koinViewModel
 import karel.hudera.spacetrace.presentation.ui.common.ArticleColumn
 import karel.hudera.spacetrace.presentation.ui.common.ImageCard
@@ -51,7 +54,13 @@ class NewsScreen : Screen {
         }
 
         Scaffold(
-            topBar = { ActionAppBar { viewModel.setEvent(NewsContract.Event.OnFavoritesClick) } }
+            topBar = {
+                ActionAppBar(
+                    title = "News from space",
+                    action = { viewModel.setEvent(NewsContract.Event.OnFavoritesClick) },
+                    icon = EvaIcons.Fill.Star
+                )
+            }
         ) { padding ->
             Column(
                 Modifier

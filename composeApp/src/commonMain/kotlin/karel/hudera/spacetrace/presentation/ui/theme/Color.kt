@@ -6,7 +6,7 @@ internal val black = Color(0xFF121212)
 internal val onBlack = Color(0xFF292929)
 internal val white = Color(0xFFFDFDFB)
 internal val onWhite = Color(0xFFF4F4F4)
-internal val debugColor = Color.Unspecified
+internal val debugColor = Color.Red
 
 internal val md_theme_light_primary = black
 internal val md_theme_light_onPrimary = black
@@ -40,7 +40,7 @@ internal val md_theme_light_outlineVariant = onWhite
 internal val md_theme_light_scrim = debugColor
 
 internal val md_theme_dark_primary = white
-internal val md_theme_dark_onPrimary = white
+internal val md_theme_dark_onPrimary = onBlack
 internal val md_theme_dark_primaryContainer = debugColor
 internal val md_theme_dark_onPrimaryContainer = debugColor
 internal val md_theme_dark_secondary = debugColor

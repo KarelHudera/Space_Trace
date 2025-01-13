@@ -25,9 +25,8 @@ fun ImageCard(picture: Picture) {
                 vertical = 8.dp,
                 horizontal = MaterialTheme.spacing.horizontal
             ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-
-        ) {
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+    ) {
         AsyncImage(
             modifier = Modifier.fillMaxWidth()
                 .heightIn(min = 0.dp, max = 200.dp),

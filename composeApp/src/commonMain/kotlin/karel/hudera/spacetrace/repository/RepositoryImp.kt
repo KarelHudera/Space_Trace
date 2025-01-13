@@ -2,6 +2,7 @@ package karel.hudera.spacetrace.repository
 
 import karel.hudera.spacetrace.domain.IRepository
 import karel.hudera.spacetrace.domain.model.Article
+import karel.hudera.spacetrace.domain.model.Launch
 import karel.hudera.spacetrace.domain.model.Picture
 import kotlinx.coroutines.flow.Flow
 
@@ -26,6 +27,9 @@ class RepositoryImp(
 
     override suspend fun removeArticleFromFavorites(articleId: Long)  =
         cacheData.removeArticleFromFavorite(articleId)
+
+    override suspend fun getUpcomingLaunches(): List<Launch> =
+        remoteData.getUpcomingLaunchesFromApi()
 
     override suspend fun isArticleFavorite(articleId: Long): Boolean =
         cacheData.isArticleFavorite(articleId)

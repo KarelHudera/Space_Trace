@@ -10,6 +10,6 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single<ICacheData> { CacheDataImp(get()) }
-    single<IRemoteData> { RemoteDataImp(get(), get(), get()) }
+    single<IRemoteData> { RemoteDataImp(get(), get(), get(), get()) }
     single<IRepository> { RepositoryImp(get(), get()) }
 }

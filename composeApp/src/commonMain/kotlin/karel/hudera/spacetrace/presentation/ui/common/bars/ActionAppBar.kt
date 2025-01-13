@@ -4,23 +4,25 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import compose.icons.EvaIcons
-import compose.icons.evaicons.Fill
-import compose.icons.evaicons.fill.Star
+import androidx.compose.ui.graphics.vector.ImageVector
 import karel.hudera.spacetrace.presentation.ui.common.ActionBarIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActionAppBar(
-    onClick: () -> Unit
+    title: String,
+    action: () -> Unit = {},
+    icon: ImageVector? = null
 ) {
     TopAppBar(
-        title = { Text(text = "News from space") },
+        title = { Text(text = title) },
         actions = {
-            ActionBarIcon(
-                onClick = onClick,
-                icon = EvaIcons.Fill.Star
-            )
+            if (icon != null) {
+                ActionBarIcon(
+                    onClick = action,
+                    icon = icon
+                )
+            }
         }
     )
 }
