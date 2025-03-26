@@ -1,42 +1,41 @@
 # Space_Trace
+This is a Compose Multiplatform project targeting Android, iOS, Web, Desktop.
 
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+## Before running!
+- check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
+- install JDK 17 or higher on your machine
+- add `local.properties` file to the project root and set a path to Android SDK there
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-    - `commonMain` is for code that’s common for all targets.
-    - Other folders are for Kotlin code that will be compiled for only the platform indicated in the
-      folder name.
-      For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-      `iosMain` would be the right folder for such calls.
+### Android
+To run the application on android device/emulator:
+- open project in Android Studio and run imported android run configuration
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for
-  your project.
+To build the application bundle:
+- run `./gradlew :composeApp:assembleDebug`
+- find `.apk` file in `composeApp/build/outputs/apk/debug/composeApp-debug.apk`
+  Run android UI tests on the connected device: `./gradlew :composeApp:connectedDebugAndroidTest`
 
-Learn more
-about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
+### Desktop
+Run the desktop application: `./gradlew :composeApp:run`
+Run desktop UI tests: `./gradlew :composeApp:jvmTest`
+
+### iOS
+To run the application on iPhone device/simulator:
+- Open `iosApp/iosApp.xcproject` in Xcode and run standard configuration
+- Or use [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) for Android Studio
+  Run iOS simulator UI tests: `./gradlew :composeApp:iosSimulatorArm64Test`
+
+### JS Browser (Experimental)
+Run the browser application: `./gradlew :composeApp:jsBrowserDevelopmentRun --continue`
+Run browser UI tests: `./gradlew :composeApp:jsBrowserTest`
+
+### Wasm Browser (Alpha)
+Run the browser application: `./gradlew :composeApp:wasmJsBrowserDevelopmentRun --continue`
+Run browser UI tests: `./gradlew :composeApp:wasmJsBrowserTest`
+
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
 [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
 [Kotlin/Wasm](https://kotl.in/wasm/)…
-
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack
-channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them
-on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
-
-You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle
-task.
-You can open the desktop application by running the `:composeApp:run` Gradle task.
-
-## Contributors
-
-Thanks to these wonderful people for contributing to the project:
-
-- [Karel Hudera](https://github.com/KarelHudera)
-- [Tomáš Borek](https://github.com/Resiniferatoxin123)
-- [Vojta Šlosar](https://github.com/Vojtza)
-- [Nikola Spěšný](https://github.com/artas1340)
-- [Štěpán Mikule](https://github.com/stepanmik)
 
 ```mermaid
 %%{
