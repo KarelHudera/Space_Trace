@@ -9,15 +9,16 @@ class SharedDatabase(
     private var database: AppDatabase? = null
 
     private suspend fun initDatabase() {
-        if (database == null) {
-            database = AppDatabase.invoke(
-                driverProvider.createDriver(),
-            )
+        database.takeIf { it != null } ?: run {
+            database = AppDatabase(driverProvider.createDriver())
         }
     }
 
+
     suspend operator fun <R> invoke(block: suspend (AppDatabase) -> R): R {
         initDatabase()
-        return block(database!!)
+        return database.takeIf { it != null }?.let {
+            block(it)
+        } ?: throw IllegalStateException("Database is not initialized")
     }
 }

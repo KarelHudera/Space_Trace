@@ -20,3 +20,12 @@ captures
 
 # Contains API keys. Do not expose this file.
 /composeApp/src/commonMain/kotlin/karel/hudera/spacetrace/data_remote/API_KEYS.kt
+
+# extra
+build
+*/build
+xcuserdata/
+Pods/
+*.jks
+*.gpg
+*yarn.lock

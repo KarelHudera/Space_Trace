@@ -1,22 +1,22 @@
 [versions]
-agp = "8.7.3"
-android-compileSdk = "34"
+agp = "8.9.1"
+android-compileSdk = "35"
 android-minSdk = "26"
-android-targetSdk = "34"
-androidx-activityCompose = "1.9.3"
+android-targetSdk = "35"
+androidx-activityCompose = "1.10.1"
 androidx-lifecycle = "2.8.4"
-androidx-uiTest = "1.7.6"
-coil = "3.0.3"
-compose = "1.7.1"
+androidx-uiTest = "1.7.8"
+coil = "3.0.4"
+compose = "1.7.3"
 composeIcons = "1.1.1"
-kotlin = "2.1.0"
-kotlinx-coroutines = "1.9.0"
+kotlin = "2.1.10"
+kotlinx-coroutines = "1.10.1"
 napier = "2.7.1"
 voyager = "1.1.0-beta02"
 kotlinx-serialization = "1.7.3"
 kotlinx-datetime = "0.6.1"
-ktor = "3.0.1"
-koin = "4.0.0"
+ktor = "3.0.3"
+koin = "4.0.1"
 sqlDelight = "2.0.2"
 buildConfig = "5.5.0"
 splashscreen = "1.0.1"
@@ -72,9 +72,8 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 sqlDelight-driver-sqlite = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
-sqlDelight-driver-sqljs = { module = "app.cash.sqldelight:sqljs-driver", version.ref = "sqlDelight" }
+sqlDelight-driver-js = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
 sqlDelight-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
-web-worker-driver = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
 
 [plugins]
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

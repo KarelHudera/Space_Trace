@@ -29,10 +29,6 @@ To run the application on iPhone device/simulator:
 Run the browser application: `./gradlew :composeApp:jsBrowserDevelopmentRun --continue`
 Run browser UI tests: `./gradlew :composeApp:jsBrowserTest`
 
-### Wasm Browser (Alpha)
-Run the browser application: `./gradlew :composeApp:wasmJsBrowserDevelopmentRun --continue`
-Run browser UI tests: `./gradlew :composeApp:wasmJsBrowserTest`
-
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
 [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
 [Kotlin/Wasm](https://kotl.in/wasm/)…

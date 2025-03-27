@@ -22,6 +22,7 @@ repositories {
 kotlin {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     androidTarget {
+        //https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html
         instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
 
         compilerOptions {
@@ -33,7 +34,7 @@ kotlin {
 
     jvm("desktop")
 
-    js {
+    js(IR) {
         browser()
         binaries.executable()
     }
@@ -50,8 +51,8 @@ kotlin {
     }
 
     sourceSets {
+        //  alternative approach to jvmMain
         val desktopMain by getting
-        val jsMain by getting
 
         androidMain.dependencies {
             implementation(compose.preview)
@@ -144,11 +145,10 @@ kotlin {
         jsMain.dependencies {
             implementation(libs.ktor.client.js)
             implementation(compose.html.core)
-         //   TODO()
-//             implementation(libs.web.worker.driver)
-//             implementation(libs.sqlDelight.driver.sqljs)
-//            implementation(npm("sql.js", "1.6.2"))
-//            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+            implementation(libs.sqlDelight.driver.js)
+            implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.0.2"))
+            implementation(npm("sql.js", "1.13.0"))
+            implementation(devNpm("copy-webpack-plugin", "13.0.0"))
 
             // Logging library
             implementation(libs.napier)
@@ -224,13 +224,14 @@ compose.desktop {
 }
 
 buildConfig {
-    buildConfigField("String", "APP_VERSION", "\"${android.defaultConfig.versionName}\"")
+    buildConfigField("String", "APP_VERSION", android.defaultConfig.versionName)
 }
 
 sqldelight {
     databases {
         create("AppDatabase") {
             packageName.set("karel.hudera.spacetrace.db")
+            generateAsync.set(true)
         }
     }
 }
