@@ -1,6 +1,8 @@
 # Space_Trace
 This is a Compose Multiplatform project targeting Android, iOS, Web, Desktop.
 
+![Platforms](https://img.shields.io/badge/Platforms-Android%20|%20iOS%20|%20macOS%20|%20Linux%20|%20Windows%20|%20WebJS-4387F6?logo=jetpackcompose&logoColor=white&style=plastic)
+
 ## Before running!
 - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
 - install JDK 17 or higher on your machine
