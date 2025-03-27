@@ -32,7 +32,7 @@ kotlin {
 
     jvmToolchain(21)
 
-    jvm("desktop")
+    jvm()
 
     js(IR) {
         browser()
@@ -51,9 +51,6 @@ kotlin {
     }
 
     sourceSets {
-        //  alternative approach to jvmMain
-        val desktopMain by getting
-
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -124,7 +121,7 @@ kotlin {
             implementation(libs.napier)
         }
 
-        desktopMain.dependencies {
+        jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.cio)
@@ -208,7 +205,7 @@ compose.desktop {
             packageName = "karel.hudera.spacetrace"
             packageVersion = System.getenv("APP_VERSION") ?: "1.0.0"
 
-            val iconBasePath = "src/desktopMain/resources/desktopAppIcons"
+            val iconBasePath = "src/jvmMain/resources/desktopAppIcons"
             linux {
                 iconFile.set(project.file("$iconBasePath/LinuxIcon.png"))
             }
