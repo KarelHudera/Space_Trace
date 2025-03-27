@@ -1,37 +1,36 @@
 package karel.hudera.spacetrace
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.Composable
+import karel.hudera.spacetrace.platform.initPermissionController
+import karel.hudera.spacetrace.presentation.ui.navigation.ViewHolder
+import karel.hudera.spacetrace.presentation.ui.theme.AppTheme
+import karel.hudera.spacetrace.utils.initImageLoader
+import karel.hudera.spacetrace.utils.initLogger
+import org.koin.compose.KoinContext
 
-import spacetrace.composeapp.generated.resources.Res
-import spacetrace.composeapp.generated.resources.compose_multiplatform
-
+/**
+ * The main entry point for the SpaceTrace application.
+ *
+ * This Composable function initializes the necessary application-wide
+ * dependencies such as logging and image loading, and then sets up the
+ * application's main view with theming and navigation.
+ *
+ * @param disableDiskCache Optional flag to disable disk caching for images.
+ */
 @Composable
-@Preview
-fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
-        }
+internal fun App(disableDiskCache: Boolean = false) = KoinContext {
+
+    // Initialize Napier for logging with DebugAntilog
+    initLogger()
+
+    // Configure and initialize the global Coil ImageLoader instance
+    initImageLoader(disableDiskCache)
+
+    // for notifications
+    initPermissionController().RequestUserPermissions()
+
+    // Apply app theme and load main content view
+    AppTheme {
+        ViewHolder()
     }
 }
