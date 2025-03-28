@@ -10,8 +10,7 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.header
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json
 import karel.hudera.spacetrace.platform.getHttpClientEngineFactory
 import kotlinx.serialization.json.Json
@@ -47,7 +46,11 @@ val httpClientModule = module {
 
             install(ResponseObserver) {
                 onResponse { response ->
-                    Napier.d("HTTP status: ${response.status.value}", tag = "Napier")
+                    if (!response.status.isSuccess()) {
+                        Napier.e("Request failed with status: ${response.status.value}", tag = "Napier")
+                    } else {
+                        Napier.d("HTTP status: ${response.status.value}", tag = "Napier")
+                    }
                 }
             }
 
